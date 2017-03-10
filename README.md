@@ -28,3 +28,6 @@ Symlink the configurations:
 ```bash
 homesick link castle
 ```
+
+By default you will need to add [powerline patched](https://github.com/powerline/fonts)
+fonts when using the default theme `agnoster`.
