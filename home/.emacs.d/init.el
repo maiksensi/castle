@@ -23,6 +23,7 @@
 (add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-mode))
 
 ;; REMOVE stupid autosave files
+(setq backup-inhibited t)
 (setq make-backup-files nil)
 
 ;; set default startup directory 
