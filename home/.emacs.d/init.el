@@ -22,11 +22,15 @@
 (require 'dockerfile-mode)
 (add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-mode))
 
+;; add hcl file mode
+(require 'hcl-mode)
+(add-to-list 'auto-mode-alist '("\\.tf\\'" . hcl-mode))
+
 ;; REMOVE stupid autosave files
 (setq backup-inhibited t)
 (setq make-backup-files nil)
 
-;; set default startup directory 
+;; set default startup directory
 (setq default-directory "~")
 
 ;; magit setup
