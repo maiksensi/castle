@@ -105,7 +105,10 @@ else
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-source ~/credentials.sh
-export WORKON_HOME=/home/ubuntu/.virtualenvs
-export PROJECT_HOME=/home/ubuntu/Devel
+if [ -f ./credentials.sh ]; then
+    source ./credentials.sh
+fi
+
+export WORKON_HOME=~/.virtualenvs
+export PROJECT_HOME=~/Devel
 source /usr/local/bin/virtualenvwrapper.sh
