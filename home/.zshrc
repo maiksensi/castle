@@ -54,7 +54,7 @@ plugins=(git ssh-agent)
 
 # User configuration
 
-export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:/usr/local/lib:$PATH
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -63,13 +63,6 @@ source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
-
-#Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='emacs'
-else
-  export EDITOR='emacs'
-fi
 
 SSH_ENV="$HOME/.ssh/environment"
 
@@ -112,7 +105,7 @@ else
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-source ./credentials.sh
+source ~/credentials.sh
 export WORKON_HOME=/home/ubuntu/.virtualenvs
 export PROJECT_HOME=/home/ubuntu/Devel
 source /usr/local/bin/virtualenvwrapper.sh

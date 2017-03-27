@@ -7,6 +7,10 @@
 ;; UI settings
 (require 'init_ui)
 
+;; yasnippets
+(require 'yasnippet)
+(yas-global-mode 1)
+
 ;; use Ido mode
 (require 'ido)
 (ido-mode t)
@@ -40,6 +44,12 @@
 ;; use the magit gitflow plugin
 (require 'magit-gitflow)
 (add-hook 'magit-mode-hook 'turn-on-magit-gitflow)
+
+;; python mode
+;; https://github.com/jorgenschaefer/elpy
+;; install rope jedi flake8 importmagic autopep8 yapf with pip before using
+(require 'elpy)
+(elpy-enable)
 
 ;; use special hook for tex-default-command, as it is a local variable
 (add-hook 'TeX-mode-hook '(lambda () (setq TeX-command-default "latexmk")))
