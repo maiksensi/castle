@@ -105,8 +105,8 @@ else
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-if [ -f ./credentials.sh ]; then
-    source ./credentials.sh
+if [ -f ~/credentials.sh ]; then
+    source ~/credentials.sh
 fi
 
 export WORKON_HOME=~/.virtualenvs
