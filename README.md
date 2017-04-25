@@ -4,11 +4,6 @@ a [Homesick](https://github.com/technicalpickles/homesick) repository.
 
 ## Get Started
 
-Clone this repository: 
-``` bash
-git clone git clone https://bitbucket.org/maiksensi/castle.git
-```
-
 Ruby [Gem](https://rubygems.org/pages/download) needs to be installed in order to run
  homesick. On Ubuntu > 16.04 it should be installed by default.
 
@@ -22,6 +17,11 @@ return the installed version.
 Install homesick: 
 ```bash
 gem install homesick
+```
+
+Clone the repository:
+```bash
+homesick clone https://bitbucket.org/maiksensi/castle.git castle
 ```
 
 Symlink the configurations: 
