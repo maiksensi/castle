@@ -112,3 +112,5 @@ fi
 export WORKON_HOME=~/.virtualenvs
 export PROJECT_HOME=~/Devel
 source /usr/local/bin/virtualenvwrapper.sh
+
+export JAVA_HOME=/usr/lib/jvm/default-java
