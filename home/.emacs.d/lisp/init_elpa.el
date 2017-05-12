@@ -12,7 +12,7 @@
 (package-initialize)
 
 ;; make sure packages get installed when missing
-(setq required-pkgs '(zenburn-theme auctex yasnippet ido magit magit-gitflow helm dockerfile-mode ox-reveal hcl-mode markdown-mode elpy))
+(setq required-pkgs '(zenburn-theme auctex yasnippet ido magit magit-gitflow helm dockerfile-mode ox-reveal hcl-mode markdown-mode elpy flymd markdown-toc flyspell))
 
 (require 'cl)
 
