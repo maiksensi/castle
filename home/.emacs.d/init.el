@@ -1,4 +1,11 @@
 ;; adding all neccessary paths we need
+
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+(package-initialize)
+
 (setq load-path (append load-path '("~/.emacs.d/lisp" )))
 
 ;; PACKAGE System init
@@ -100,10 +107,14 @@
      ("Clean" "TeX-clean" TeX-run-function nil t :help "Delete generated intermediate files")
      ("Clean All" "(TeX-clean t)" TeX-run-function nil t :help "Delete generated intermediate and output files")
      ("latexmk" "latexmk -pdf -interaction=nonstopmode %t" TeX-run-command t t :help "Run latexmk"))))
- '(inhibit-startup-screen t))
+ '(inhibit-startup-screen t)
+ '(package-selected-packages
+   (quote
+    (helm-ag markdown-toc flymd elpy markdown-mode hcl-mode ox-reveal dockerfile-mode helm magit-gitflow magit yasnippet auctex zenburn-theme))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(my-carriage-return-face ((((class color)) (:background "blue"))) t)
+ '(my-tab-face ((((class color)) (:background "green"))) t))

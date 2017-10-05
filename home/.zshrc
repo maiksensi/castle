@@ -1,12 +1,16 @@
 # Path to your oh-my-zsh installation.
-export ZSH=$HOME/.oh-my-zsh
+
+if [ -f ${HOME}/.oh-my-zsh ]; then
+    export ZSH=$HOME/.oh-my-zsh
+    source $ZSH/oh-my-zsh.sh
+fi # end if only oh-my-zsh is installed
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 #ZSH_THEME="babun"
-ZSH_THEME="agnoster"
+#ZSH_THEME="random"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -55,46 +59,41 @@ plugins=(git ssh-agent)
 # User configuration
 
 export PATH=$HOME/bin:/usr/local/bin:/usr/local/lib:$PATH
-# export MANPATH="/usr/local/man:$MANPATH"
-
-source $ZSH/oh-my-zsh.sh
-
-#source $HOME/.bashrc
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
-SSH_ENV="$HOME/.ssh/environment"
+if [ -d ${HOME}/.ssh ]; then
+    if [ -f ${HOME}/.ssh/environment ]; then
+	SSH_ENV="${HOME}/.ssh/environment"
+    else
+	touch ${HOME}/.ssh/environment
+    fi # end if .ssh/environment exists
 
-function start_agent {
-    echo "Initialising new SSH agent..."
-    /usr/bin/ssh-agent | sed 's/^echo/#echo/' > "${SSH_ENV}"
-    echo succeeded
-    chmod 600 "${SSH_ENV}"
-    . "${SSH_ENV}" > /dev/null
-    /usr/bin/ssh-add;
-    /usr/bin/ssh-add ~/.ssh/id_rsa_lfnet;
-    /usr/bin/ssh-add ~/.ssh/id_rsa_github;
-    /usr/bin/ssh-add ~/.ssh/id_rsa_macke;
-}
-
-# Source SSH settings, if applicable
-
-if [ -f "${SSH_ENV}" ]; then
-    . "${SSH_ENV}" > /dev/null
-    #ps ${SSH_AGENT_PID} doesn't work under cywgin
-    ps -ef | grep ${SSH_AGENT_PID} | grep ssh-agent$ > /dev/null || {
-	start_agent;
+    function start_agent {
+	echo "Initialising new SSH agent..."
+	ssh-agent | sed 's/^echo/#echo/' > "${SSH_ENV}"
+	echo succeeded
+	chmod 600 "${SSH_ENV}"
+	. "${SSH_ENV}" > /dev/null
+	ssh-add;
+	ssh-add ~/.ssh/id_rsa_lfnet;
+	ssh-add ~/.ssh/id_rsa_github;
+	ssh-add ~/.ssh/id_rsa_macke;
     }
-else
-    start_agent;
-    fi
 
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
+    # Source SSH settings, if applicable
 
-# ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
+    if [ -f "${SSH_ENV}" ]; then
+	. "${SSH_ENV}" > /dev/null
+	#ps ${SSH_AGENT_PID} doesn't work under cywgin
+	ps -ef | grep ${SSH_AGENT_PID} | grep ssh-agent$ > /dev/null || {
+	    start_agent;
+	}
+    else
+	start_agent;
+    fi # end if ssh env exists
+fi # end if .ssh exists
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -108,9 +107,3 @@ else
 if [ -f ~/credentials.sh ]; then
     source ~/credentials.sh
 fi
-
-export WORKON_HOME=~/.virtualenvs
-export PROJECT_HOME=~/Devel
-source /usr/local/bin/virtualenvwrapper.sh
-
-export JAVA_HOME=/usr/lib/jvm/default-java
