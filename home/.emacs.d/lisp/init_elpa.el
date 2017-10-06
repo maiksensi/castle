@@ -3,7 +3,7 @@
 (require 'package)
 
 ;; 3rd party repository (python-mode, ipython, etc)
-(add-to-list 'package-archives '("marmalade" . "https://marmalade-repo.org/packages/"))
+;;(add-to-list 'package-archives '("marmalade" . "https://marmalade-repo.org/packages/"))
 
 ;; 3rd party repo for themes, ergoemacs, etc
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
@@ -12,7 +12,7 @@
 (package-initialize)
 
 ;; make sure packages get installed when missing
-(setq required-pkgs '(zenburn-theme auctex yasnippet ido magit magit-gitflow helm dockerfile-mode ox-reveal hcl-mode markdown-mode elpy flymd markdown-toc flyspell helm-ag))
+(setq required-pkgs '(zenburn-theme auctex yasnippet ido magit magit-gitflow helm dockerfile-mode ox-reveal hcl-mode markdown-mode elpy flymd markdown-toc flyspell helm-ag nixos-options helm-nixos-options nix-sandbox company-nixos-options))
 
 (require 'cl)
 
