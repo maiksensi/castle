@@ -58,6 +58,18 @@
 (require 'elpy)
 (elpy-enable)
 
+;; enable a shortcut for nixos options
+;; see https://github.com/travisbhartwell/nix-emacs
+(global-set-key (kbd "C-c C-s") 'helm-nixos-options)
+
+(add-to-list 'company-backends 'company-nixos-options)
+(setq flycheck-command-wrapper-function
+        (lambda (command) (apply 'nix-shell-command (nix-current-sandbox) command))
+      flycheck-executable-find
+      (lambda (cmd) (nix-executable-find (nix-current-sandbox) cmd)))
+(setq haskell-process-wrapper-function
+        (lambda (args) (apply 'nix-shell-command (nix-current-sandbox) args)))
+
 ;; use special hook for tex-default-command, as it is a local variable
 (add-hook 'TeX-mode-hook '(lambda () (setq TeX-command-default "latexmk")))
 
