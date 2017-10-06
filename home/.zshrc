@@ -93,9 +93,21 @@ if [ -d ${HOME}/.ssh ]; then
 	chmod 600 "${SSH_ENV}"
 	. "${SSH_ENV}" > /dev/null
 	ssh-add;
-	ssh-add ~/.ssh/id_rsa_lfnet;
-	ssh-add ~/.ssh/id_rsa_github;
-	ssh-add ~/.ssh/id_rsa_macke;
+	if [ -f ~/.ssh/id_rsa_lfnet ]; then
+	    ssh-add ~/.ssh/id_rsa_lfnet;
+	fi
+	
+	if [ -f ~/.ssh/id_rsa_github ]; then
+	    ssh-add ~/.ssh/id_rsa_github;
+	fi
+	
+	if [ -f ~/.ssh/id_rsa_macke ]; then
+	    ssh-add ~/.ssh/id_rsa_macke;
+	fi
+	
+	if [ -f ~/.ssh/id_rsa_bitbucket ]; then
+	    ssh-add ~/.ssh/id_rsa_bitbucket;
+	fi
     }
 
     # Source SSH settings, if applicable
