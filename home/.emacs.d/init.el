@@ -58,6 +58,10 @@
 (require 'elpy)
 (elpy-enable)
 
+;; make sure to use correct markdown command
+(custom-set-variables '(markdown-command "/usr/bin/pandoc"))
+
+;; USE special hook for tex-default-command, as it is a local variable
 ;; enable a shortcut for nixos options
 ;; see https://github.com/travisbhartwell/nix-emacs
 (global-set-key (kbd "C-c C-s") 'helm-nixos-options)
