@@ -51,7 +51,10 @@
 (require 'elpy)
 (elpy-enable)
 
-;; use special hook for tex-default-command, as it is a local variable
+;; make sure to use correct markdown command
+(custom-set-variables '(markdown-command "/usr/bin/pandoc"))
+
+;; USE special hook for tex-default-command, as it is a local variable
 (add-hook 'TeX-mode-hook '(lambda () (setq TeX-command-default "latexmk")))
 
 (custom-set-variables

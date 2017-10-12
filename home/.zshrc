@@ -114,3 +114,7 @@ export PROJECT_HOME=~/Devel
 source /usr/local/bin/virtualenvwrapper.sh
 
 export JAVA_HOME=/usr/lib/jvm/default-java
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/home/maiksen/.sdkman"
+[[ -s "/home/maiksen/.sdkman/bin/sdkman-init.sh" ]] && source "/home/maiksen/.sdkman/bin/sdkman-init.sh"
