@@ -1,16 +1,19 @@
 ;UI init
 
+;; turn off tabs
+(setq-default indent-tabs-mode nil)
+
 ;; set pretty font
 (set-face-attribute 'default nil :font "Hack-10")
 
 ;; turn off toolbar and the menubar and the scrollbar
 (if (functionp 'tool-bar-mode) (tool-bar-mode -1))
-(if (functionp 'menu-bar-mode) (menu-bar-mode -1)) 
+(if (functionp 'menu-bar-mode) (menu-bar-mode -1))
 (if (functionp 'toogle-scroll-bar) (toggle-scroll-bar -1))
 
 ;; Changes all yes/no questions to y/n type
 (fset 'yes-or-no-p 'y-or-n-p)
-;; highlight line where cursor is 
+;; highlight line where cursor is
 (global-hl-line-mode 1)
 ;; important custom for commenting regions
 (global-set-key (kbd "C-;") 'comment-or-uncomment-region)
@@ -38,23 +41,23 @@
 	("\t" (0 'my-tab-face t))
 	))))))
 
-					; make characters after column 80 purple
+;; make characters after column 80 purple
 (setq whitespace-style
       (quote (face trailing tab-mark lines-tail)))
 (add-hook 'find-file-hook 'whitespace-mode)
 
-					; transform literal tabs into a right-pointing triangle
+;; transform literal tabs into a right-pointing triangle
 (setq
  whitespace-display-mappings ;http://ergoemacs.org/emacs/whitespace-mode.html
  '(
    (tab-mark 9 [9654 9] [92 9])
-					;others substitutions...
+;others substitutions...
    ))
 
 ; COLOR THEME init
 (load-theme 'zenburn t)
 
-; FILE HANDLING init 
+; FILE HANDLING init
 ;; do not make backup files
 (setq make-backup-files nil)
 ;; create the autosave dir if necessary, since emacs won't.

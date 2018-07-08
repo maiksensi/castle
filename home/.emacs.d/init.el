@@ -59,24 +59,6 @@
 (elpy-enable)
 
 ;; make sure to use correct markdown command
-(custom-set-variables '(markdown-command "/usr/bin/pandoc"))
-
-;; USE special hook for tex-default-command, as it is a local variable
-;; enable a shortcut for nixos options
-;; see https://github.com/travisbhartwell/nix-emacs
-(global-set-key (kbd "C-c C-s") 'helm-nixos-options)
-
-(add-to-list 'company-backends 'company-nixos-options)
-(setq flycheck-command-wrapper-function
-        (lambda (command) (apply 'nix-shell-command (nix-current-sandbox) command))
-      flycheck-executable-find
-      (lambda (cmd) (nix-executable-find (nix-current-sandbox) cmd)))
-(setq haskell-process-wrapper-function
-        (lambda (args) (apply 'nix-shell-command (nix-current-sandbox) args)))
-
-;; use special hook for tex-default-command, as it is a local variable
-(add-hook 'TeX-mode-hook '(lambda () (setq TeX-command-default "latexmk")))
-
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -124,9 +106,45 @@
      ("Clean All" "(TeX-clean t)" TeX-run-function nil t :help "Delete generated intermediate and output files")
      ("latexmk" "latexmk -pdf -interaction=nonstopmode %t" TeX-run-command t t :help "Run latexmk"))))
  '(inhibit-startup-screen t)
+ '(markdown-command "/usr/bin/pandoc")
  '(package-selected-packages
    (quote
     (helm-ag markdown-toc flymd elpy markdown-mode hcl-mode ox-reveal dockerfile-mode helm magit-gitflow magit yasnippet auctex zenburn-theme))))
+
+;; USE special hook for tex-default-command, as it is a local variable
+;; enable a shortcut for nixos options
+;; see https://github.com/travisbhartwell/nix-emacs
+(global-set-key (kbd "C-c C-s") 'helm-nixos-options)
+
+(add-to-list 'company-backends 'company-nixos-options)
+(setq flycheck-command-wrapper-function
+        (lambda (command) (apply 'nix-shell-command (nix-current-sandbox) command))
+      flycheck-executable-find
+      (lambda (cmd) (nix-executable-find (nix-current-sandbox) cmd)))
+(setq haskell-process-wrapper-function
+        (lambda (args) (apply 'nix-shell-command (nix-current-sandbox) args)))
+
+;; use hunspell as spellchecker
+;; install hunspell, hunspell-de-de hunspell-en-gb before
+(setq ispell-program-name "hunspell"          ; Use hunspell to correct mistakes
+      ispell-dictionary   "english") ; Default dictionary to use
+(setq ispell-current-dictionary "english")
+
+(defun switch-dictionary-de-en ()
+  "Switch german and english dictionaries."
+  (interactive)
+  (let* ((dict ispell-current-dictionary)
+         (new (if (string= dict "english") "deutsch"
+                   "english")))
+    (ispell-change-dictionary new)
+    (message "Switched dictionary from %s to %s" dict new)))
+
+(global-set-key (kbd "C-c d") 'switch-dictionary-de-en)
+
+;; use special hook for tex-default-command, as it is a local variable
+(add-hook 'TeX-mode-hook '(lambda () (setq TeX-command-default "latexmk")))
+
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

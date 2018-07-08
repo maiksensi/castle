@@ -71,16 +71,8 @@ if [ -d ${HOME}/.ssh ]; then
 	chmod 600 "${SSH_ENV}"
 	. "${SSH_ENV}" > /dev/null
 	ssh-add;
-	if [ -f ~/.ssh/id_rsa_lfnet ]; then
-	    ssh-add ~/.ssh/id_rsa_lfnet;
-	fi
-	
 	if [ -f ~/.ssh/id_rsa_github ]; then
 	    ssh-add ~/.ssh/id_rsa_github;
-	fi
-	
-	if [ -f ~/.ssh/id_rsa_macke ]; then
-	    ssh-add ~/.ssh/id_rsa_macke;
 	fi
 	
 	if [ -f ~/.ssh/id_rsa_bitbucket ]; then
@@ -120,6 +112,16 @@ source /usr/local/bin/virtualenvwrapper.sh
 
 export JAVA_HOME=/usr/lib/jvm/default-java
 
+if [ -f ${HOME}/.nix-profile/etc/profile.d/nix.sh ]; then
+    source /home/maiksen/.nix-profile/etc/profile.d/nix.sh
+fi
+
+# pgp signing
+export GPG_TTY=$(tty)
+
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="/home/maiksen/.sdkman"
-[[ -s "/home/maiksen/.sdkman/bin/sdkman-init.sh" ]] && source "/home/maiksen/.sdkman/bin/sdkman-init.sh"
+if [ -s "/home/maiksen/.sdkman/bin/sdkman-init.sh" ]; then
+   export SDKMAN_DIR="/home/maiksen/.sdkman"
+   source "/home/maiksen/.sdkman/bin/sdkman-init.sh"
+fi
+
